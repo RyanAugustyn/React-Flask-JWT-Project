@@ -32,6 +32,7 @@ class FavoriteResource(Resource):
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
+        form_data["user_id"] = user_id
         favorite = favorite_schema.load(form_data)
         favorite.user_id = user_id
         db.session.add(favorite)
