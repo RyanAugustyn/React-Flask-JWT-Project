@@ -10,12 +10,6 @@ from database.models import Favorite
 
 class UserReviewsResource(Resource):
     @jwt_required()
-    def get(self):
-        user_id = get_jwt_identity()
-        user_reviews = Favorite.query.filter_by(user_id=user_id)
-        return favorties_schema.dump(user_reviews), 200
-    
-    @jwt_required()
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
@@ -27,4 +21,19 @@ class UserReviewsResource(Resource):
 
 
   
-
+class FavoritesResource(Resource):
+    @jwt_required()
+    def get(self):
+        user_id = get_jwt_identity()
+        user_reviews = Favorite.query.filter_by(user_id=user_id)
+        return favorties_schema.dump(user_reviews), 200
+    
+    @jwt_required()
+    def post(self):
+        user_id = get_jwt_identity()
+        form_data = request.get_json()
+        favorite = favorite_schema.load(form_data)
+        favorite.user_id = user_id
+        db.session.add(favorite)
+        db.session.commit()
+        return favorite_schema.dump(favorite), 201
