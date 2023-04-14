@@ -66,7 +66,7 @@ class ReviewSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     book_id = fields.String(required=True)
     text = fields.String(required=True)
-    rating = fields.Integer(required=True)
+    rating = fields.String(required=True)
     user_id = fields.Integer(required=True)
     user = ma.Nested(UserSchema, many=False)
     class Meta: 
@@ -76,6 +76,7 @@ class ReviewSchema(ma.Schema):
         return Review(**data)
 
 review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
 
 class FavoriteSchema(ma.Schema):
     id = fields.Integer(primary_key=True)

@@ -5,7 +5,7 @@ from flask_restful import Resource
 from database.models import db
 from database.schemas import review_schema
 from database.schemas import favorties_schema, favorite_schema
-from database.models import Favorite
+from database.models import Favorite, Review, User
 
 
 class UserReviewsResource(Resource):
@@ -38,4 +38,34 @@ class FavoriteResource(Resource):
         favorite.user_id = user_id
         db.session.add(favorite)
         db.session.commit()
-        return favorite_schema.dump(favorite), 201
+        return favorite_schema.dump(new_favorite), 201
+
+
+
+class GetBookInformationResource(Resource):
+    def get(self, book_id):
+        custom_response = {}
+        all_ratings = 0
+        favorited = False
+
+        #check for logged in user and favorite
+        if verify_jwt_in_request():
+            user_id = get_jwt_identity()
+            favorite = Favorite.query.filter_by(user_id = user_id)
+            if favorite.book_id == book_id:
+                favorited = True
+
+        #get all reviews and calculate avg rating
+        all_book_reviews = Review.query.filter_by(book_id = book_id)
+        for review in all_book_reviews:
+            all_ratings += review.rating          
+        avg_rating = all_ratings/ all_book_reviews.length()
+
+        custom_response = {
+            "reviews": review_schema.dump(all_book_reviews), 
+            "average rating": avg_rating,
+            "favorited": favorited
+        }
+
+        return custom_response, 200
+
