@@ -64,9 +64,9 @@ cars_schema = CarSchema(many=True)
 
 class ReviewSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    book_id = fields.Integer(required=True)
+    book_id = fields.String(required=True)
     text = fields.String(required=True)
-    rating = fields.String(required=True)
+    rating = fields.Integer(required=True)
     user_id = fields.Integer()
     user = ma.Nested(UserSchema, many=False)
     class Meta: 
