@@ -39,6 +39,7 @@ class Favorite(db.model):
     title = db.Column(db.String(255), nullable=False)
     thumbnail_url = db.Column(db.String(400), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User")
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
