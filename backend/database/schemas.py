@@ -1,6 +1,7 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
 from database.models import User, Car
+from database.models import Favorite
 
 ma = Marshmallow()
 
@@ -60,6 +61,7 @@ cars_schema = CarSchema(many=True)
 
 # TODO: Add your schemas below
 
+
 class ReviewSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     book_id = fields.Integer(required=True)
@@ -71,3 +73,22 @@ class ReviewSchema(ma.Schema):
         fields("id", "book_id", "text", "rating", "user_id", "user")
 
 review_schema = ReviewSchema()
+
+class FavoriteSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    book_id = fields.String(required=True)
+    title = fields.String(required=True)
+    thumbnail_url = fields.String(required=True)
+    user_id = fields.Integer(required=True)
+    user = ma.Nested(UserSchema, many=False)
+
+    class Meta:
+        fields = ("id", "book_id", "title", "thumbnail_url", "user_id", "user")
+
+    @post_load
+    def create_favorite(self, data, **kwargs):
+        return Favorite(**data)
+    
+favorite_schema = FavoriteSchema()
+favorties_schema = FavoriteSchema(many=True)
+
