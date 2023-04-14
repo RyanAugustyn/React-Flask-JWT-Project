@@ -13,8 +13,9 @@ class UserReviewsResource(Resource):
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
+        form_data["user_id"] = int(user_id)
         review = review_schema.load(form_data)
-        review.user_id = user_id
+        
         db.session.add(review)
         db.session.commit()
         return review_schema.dump(review), 201
@@ -32,6 +33,7 @@ class FavoriteResource(Resource):
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
+        form_data["user_id"] = user_id
         favorite = favorite_schema.load(form_data)
         favorite.user_id = user_id
         db.session.add(favorite)

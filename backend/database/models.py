@@ -43,7 +43,7 @@ class Favorite(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    book_id = db.Column(db.Integer, nullable=False)
+    book_id = db.Column(db.String(100), nullable=False)
     text = db.Column(db.String(2500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
