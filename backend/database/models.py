@@ -34,8 +34,8 @@ class Car(db.Model):
 
 class Favorite(db.model):
     id = db.Column(db.Integer, primary_key=True)
-    book_id = db.Column(db.Integer)
+    book_id = db.Column(db.String(255), nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    thumbnail_url = db.Column(db.String(400))
+    thumbnail_url = db.Column(db.String(400), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User")
