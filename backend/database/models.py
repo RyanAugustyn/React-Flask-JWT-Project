@@ -31,3 +31,11 @@ class Car(db.Model):
     user = db.relationship("User")
 
 # TODO: Add your models below, remember to add a new migration and upgrade database
+
+class Favorite(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer)
+    title = db.Column(db.String(255), nullable=False)
+    thumbnail_url = db.Column(db.String(400))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User")
