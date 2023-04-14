@@ -19,20 +19,22 @@ class UserReviewsResource(Resource):
         db.session.commit()
         return review_schema.dump(review), 201
 
-class UserReviewsResource(Resource):
+
+  
+class FavoriteResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
         user_reviews = Favorite.query.filter_by(user_id=user_id)
         return favorties_schema.dump(user_reviews), 200
-
+    
     @jwt_required()
     def post(self):
-        userid = get_jwt_identity()
+        user_id = get_jwt_identity()
         form_data = request.get_json()
-        new_favorite = favorite_schema.load(form_data)
-        new_favorite.user_id = userid
-        db.session.add(new_favorite)
+        favorite = favorite_schema.load(form_data)
+        favorite.user_id = user_id
+        db.session.add(favorite)
         db.session.commit()
         return favorite_schema.dump(new_favorite), 201
 

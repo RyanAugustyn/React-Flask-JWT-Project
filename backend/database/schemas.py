@@ -70,7 +70,7 @@ class ReviewSchema(ma.Schema):
     user_id = fields.Integer()
     user = ma.Nested(UserSchema, many=False)
     class Meta: 
-        fields("id", "book_id", "text", "rating", "user_id", "user")
+        fields = ("id", "book_id", "text", "rating", "user_id", "user")
 
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
