@@ -73,6 +73,7 @@ class ReviewSchema(ma.Schema):
         fields("id", "book_id", "text", "rating", "user_id", "user")
 
 review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
 
 class FavoriteSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
