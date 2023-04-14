@@ -33,7 +33,7 @@ class Car(db.Model):
 # TODO: Add your models below, remember to add a new migration and upgrade database
 
 
-class Favorite(db.model):
+class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.String(255), nullable=False)
     title = db.Column(db.String(255), nullable=False)

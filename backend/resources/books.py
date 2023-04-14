@@ -21,7 +21,7 @@ class UserReviewsResource(Resource):
 
 
   
-class FavoritesResource(Resource):
+class FavoriteResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
