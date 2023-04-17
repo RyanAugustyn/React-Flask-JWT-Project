@@ -80,3 +80,22 @@ class GetBookInformationResource(Resource):
 
         return custom_response, 200
 
+class ReviewDetailResource(Resource):
+    @jwt_required()
+    def put(self, review_id):
+        try:
+            verify_jwt_in_request()
+            user_id = get_jwt_identity()
+            review = Review.query.filter_by(user_id = user_id, id = review_id)
+
+            if 'book_id' in request.json:
+                review.book_id = request.json['book_id']
+            if 'text' in request.json:
+                review.text = request.json['text']
+            if 'rating' in request.json:
+                review.rating = request.json['rating']
+
+            db.session.commit()
+            return review_schema.dump(review), 200
+        except:
+            return "Unauthorized", 401
