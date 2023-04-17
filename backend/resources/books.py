@@ -72,7 +72,7 @@ class ReviewDetailResource(Resource):
     def put(self, review_id):
         try:
             verify_jwt_in_request()
-            user_id = get_jwt_identity()
+            #user_id = get_jwt_identity()
             review = Review.query.get_or_404(review_id)
 
             if 'book_id' in request.json:
@@ -90,7 +90,8 @@ class ReviewDetailResource(Resource):
     @jwt_required()
     def delete(self, review_id):
         try:
-            user_id = get_jwt_identity()
+            verify_jwt_in_request()
+            #user_id = get_jwt_identity()
             review_from_db = Review.query.get_or_404(review_id)
             db.session.delete(review_from_db)
             db.session.commit()
