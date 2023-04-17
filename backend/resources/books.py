@@ -18,17 +18,6 @@ class UserReviewsResource(Resource):
         db.session.add(review)
         db.session.commit()
         return review_schema.dump(review), 201
-
-class UserReviewResource(Resource):
-    @jwt_required()
-    def delete(self, review_id):
-        user_id = get_jwt_identity()
-        review_from_db = Review.query.get_or_404(review_id)
-        db.session.delete(review_from_db)
-        db.session.commit()
-        return '', 204    
-
-
   
 class FavoriteResource(Resource):
     @jwt_required()
@@ -47,8 +36,6 @@ class FavoriteResource(Resource):
         db.session.add(favorite)
         db.session.commit()
         return favorite_schema.dump(favorite), 201
-
-
 
 class GetBookInformationResource(Resource):
     def get(self, book_id):
@@ -86,7 +73,7 @@ class ReviewDetailResource(Resource):
         try:
             verify_jwt_in_request()
             user_id = get_jwt_identity()
-            review = Review.query.filter_by(user_id = user_id, id = review_id)
+            review = Review.query.get_or_404(review_id)
 
             if 'book_id' in request.json:
                 review.book_id = request.json['book_id']
@@ -97,5 +84,16 @@ class ReviewDetailResource(Resource):
 
             db.session.commit()
             return review_schema.dump(review), 200
+        except:
+            return "Unauthorized", 401
+
+    @jwt_required()
+    def delete(self, review_id):
+        try:
+            user_id = get_jwt_identity()
+            review_from_db = Review.query.get_or_404(review_id)
+            db.session.delete(review_from_db)
+            db.session.commit()
+            return '', 204    
         except:
             return "Unauthorized", 401
