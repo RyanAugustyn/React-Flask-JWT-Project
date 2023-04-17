@@ -19,6 +19,15 @@ class UserReviewsResource(Resource):
         db.session.commit()
         return review_schema.dump(review), 201
 
+class UserReviewResource(Resource):
+    @jwt_required()
+    def delete(self, review_id):
+        user_id = get_jwt_identity()
+        review_from_db = Review.query.get_or_404(review_id)
+        db.session.delete(review_from_db)
+        db.session.commit()
+        return '', 204    
+
 
   
 class FavoriteResource(Resource):
