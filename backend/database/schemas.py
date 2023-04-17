@@ -66,7 +66,7 @@ class ReviewSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     book_id = fields.String(required=True)
     text = fields.String(required=True)
-    rating = fields.String(required=True)
+    rating = fields.Integer(required=True)
     user_id = fields.Integer(required=True)
     user = ma.Nested(UserSchema, many=False)
     class Meta: 
