@@ -1,0 +1,4 @@
+.books_map {
+  display: flex;
+  justify-content: space-around;
+}

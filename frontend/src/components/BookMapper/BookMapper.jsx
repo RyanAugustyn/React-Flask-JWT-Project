@@ -1,23 +1,12 @@
 import React from "react";
-import BookPresenter from "../BookPresenter/BookPresenter";
-book;
+import BookCard from "../BookPresenter/BookCard";
+import "./BookMapper.css";
 
 const BookMapper = ({ books }) => {
-  const book = {
-    image: "",
-    title: "",
-    pageCount: 0,
-    subTitle: "",
-    priceCurrency: "",
-    priceAmount: 0,
-    author: "",
-    description: "",
-  };
-
   return (
-    <div>
+    <div className="books_map">
       {books.map((book) => (
-        <BookPresenter key={book.id} book={book} />
+        <BookCard key={book.id} book={book} />
       ))}
     </div>
   );
