@@ -4,6 +4,7 @@ import "./App.css";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
+import TestPage from "./pages/TestPage/TestPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
@@ -23,7 +24,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <TestPage />
             </PrivateRoute>
           }
         />
