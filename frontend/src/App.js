@@ -8,6 +8,7 @@ import TestPage from "./pages/TestPage/TestPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -22,10 +23,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route
-          path="/"
+          path="/favorites"
           element={
             <PrivateRoute>
-              <TestPage />
+              <FavoritesPage />
             </PrivateRoute>
           }
         />
