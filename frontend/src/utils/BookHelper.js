@@ -21,9 +21,11 @@ export const createBook = (volume) => {
     }
   } catch {}
   let authorString = "";
+  let author_count = 0;
   try {
     volume.volumeInfo.authors.forEach((author) => {
       authorString = authorString + " " + author;
+      author_count++;
     });
     authorString = authorString.trim();
   } catch {
@@ -41,6 +43,7 @@ export const createBook = (volume) => {
     priceAmount: priceAmount,
     author: authorString,
     description: description,
+    author_count: author_count,
   };
   return book;
 };
