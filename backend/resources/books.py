@@ -57,7 +57,10 @@ class GetBookInformationResource(Resource):
         all_book_reviews_json = reviews_schema.dump(all_book_reviews)
         for review in all_book_reviews_json:
             all_ratings += review["rating"]
-        avg_rating = all_ratings/ len(all_book_reviews_json)
+        if len(all_book_reviews_json) == 0:
+            avg_rating = 0
+        else:
+            avg_rating = all_ratings/ len(all_book_reviews_json)
 
         custom_response = {
             "reviews": all_book_reviews_json, 
