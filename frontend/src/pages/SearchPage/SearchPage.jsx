@@ -12,7 +12,6 @@ const SearchPage = () => {
     event.preventDefault();
 
     try {
-      debugger;
       let response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${searchBarText}&startIndex=0&maxResults=40&printType=books&key=AIzaSyCvXz_dgisc4ShRelIp9BYV486C7wNPETQ`
       );

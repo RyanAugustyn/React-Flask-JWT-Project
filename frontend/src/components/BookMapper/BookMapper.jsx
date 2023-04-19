@@ -3,6 +3,10 @@ import BookCard from "../BookPresenter/BookCard";
 import "./BookMapper.css";
 
 const BookMapper = ({ books }) => {
+  if (books === undefined) {
+    books = [];
+  }
+
   return (
     <div className="books_map">
       {books.map((book) => (
