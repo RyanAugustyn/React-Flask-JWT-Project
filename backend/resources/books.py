@@ -44,7 +44,7 @@ class GetBookInformationResource(Resource):
         favorited = False
 
         #check for logged in user and favorite
-        if verify_jwt_in_request():
+        if verify_jwt_in_request(optional=True):
             user_id = get_jwt_identity()
             favorite = Favorite.query.filter_by(user_id = user_id, book_id = book_id)
             favorite_json = favorties_schema.dump(favorite)

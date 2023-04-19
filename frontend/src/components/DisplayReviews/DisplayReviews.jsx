@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import axios from "axios";
 
-const DisplayReviews = ({ book }) => {
-  const [reviews, setReviews] = useState();
+const DisplayReviews = ({ book_id }) => {
+  const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
-  const book_id = useParams();
 
   useEffect(() => {
     getReviews();
