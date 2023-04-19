@@ -8,6 +8,14 @@ const FavoritesPage = (props) => {
   const [favorites, setFavorites] = useState([]);
   const [user, token] = useAuth();
 
+  function formatFavorite(object) {
+    let book = {
+      id: object.book_id,
+      image: object.thumbnail_url,
+      title: object.title,
+    };
+    return book;
+  }
   //get list of favorites by logged in user
 
   useEffect(() => {
@@ -22,7 +30,10 @@ const FavoritesPage = (props) => {
             },
           }
         );
-        setFavorites(response.data);
+        let formatedFavorites = response.data.map((unformated) =>
+          formatFavorite(unformated)
+        );
+        setFavorites(formatedFavorites);
       } catch (error) {
         console.log(error.response.data);
       }
@@ -33,10 +44,10 @@ const FavoritesPage = (props) => {
   return (
     <div className="container">
       <h1>List of Favorites for {user.username}!</h1>
-      {favorites ? (
-        <h2>"No Favorites Yet!"</h2>
-      ) : (
+      {favorites != [] ? (
         <BookMapper books={favorites} />
+      ) : (
+        <h2>"No Favorites Yet!"</h2>
       )}
     </div>
   );
