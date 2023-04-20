@@ -1,6 +1,10 @@
 export const createBook = (volume) => {
   const id = volume.id;
-  const image = volume.volumeInfo.imageLinks.thumbnail;
+  let image = null;
+  try {
+    image = volume.volumeInfo.imageLinks.thumbnail;
+  } catch {}
+
   const title = volume.volumeInfo.title;
   let subTitle = "";
   try {

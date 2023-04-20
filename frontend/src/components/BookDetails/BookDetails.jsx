@@ -32,7 +32,11 @@ const BookDetails = ({ bookID }) => {
       ) : (
         <div className="details_container">
           <div className="image_container">
-            <img className="book_image" src={book.image} />
+            {book.image ? (
+              <img className="book_image" src={book.image} />
+            ) : (
+              <p>No Image</p>
+            )}
           </div>
           <div className="above_description_container">
             <h2 className="book_title">{book.title}</h2>
