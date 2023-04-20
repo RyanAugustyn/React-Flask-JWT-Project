@@ -10,7 +10,7 @@ const DisplayReviews = ({ book_id }) => {
 
   useEffect(() => {
     getReviews();
-  }, []);
+  }, [reviews]);
 
   const getReviews = async () => {
     try {
