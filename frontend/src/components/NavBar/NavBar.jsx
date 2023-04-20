@@ -20,6 +20,7 @@ const Navbar = () => {
             Search{" "}
           </Link>
         </li>
+
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>

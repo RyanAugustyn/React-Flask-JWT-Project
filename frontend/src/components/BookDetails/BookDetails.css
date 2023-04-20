@@ -1,0 +1,63 @@
+.details_container {
+  /* background-color: blue; */
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image_container {
+  /* background-color: green; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.above_description_container {
+  /* background-color: red; */
+}
+
+.descritpiton_container {
+  /* background-color: yellow; */
+  margin-top: 5vh;
+}
+
+.book_title {
+  text-align: center;
+  /* background-color: purple; */
+  margin-top: 5px;
+}
+
+.below_title_container {
+  /* background-color: rgb(42, 165, 69); */
+  width: 100%;
+  height: 50px;
+}
+
+.pages {
+  float: left;
+  width: 10%;
+  /* background-color: beige; */
+}
+
+.subtitle {
+  float: left;
+  width: 80%;
+  text-align: center;
+  /* background-color: aquamarine; */
+}
+
+.price {
+  float: right;
+  width: 10%;
+  text-align: right;
+  /* background-color: cornflowerblue; */
+}
+
+.author_container {
+  float: left;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  /* background-color: deeppink; */
+}

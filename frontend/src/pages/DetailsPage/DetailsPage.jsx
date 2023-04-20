@@ -14,7 +14,9 @@ const DetailsPage = () => {
       </div>
       <div className="right_side">
         <div className="add_review">
-          <AddReview book_id={bookID} />
+          <div className="center_add_review">
+            <AddReview book_id={bookID} />
+          </div>
         </div>
         <div className="reviews">
           <DisplayReveiws book_id={bookID} />

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./AddReview.css";
 
 const AddReview = ({ book_id }) => {
   const [rating, setRating] = useState(0);
@@ -14,40 +15,43 @@ const AddReview = ({ book_id }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    let book_review = {
-      book_id: book_id,
-      text: ratingText,
-      rating: rating,
-    };
     debugger;
-    try {
-      let response = await axios.post(
-        "http://127.0.0.1:5000/api/user_reviews",
-        book_review,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+    if (ratingText !== "" && rating !== 0) {
+      let book_review = {
+        book_id: book_id,
+        text: ratingText,
+        rating: rating,
+      };
+      debugger;
+      try {
+        let response = await axios.post(
+          "http://127.0.0.1:5000/api/user_reviews",
+          book_review,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
-      document.getElementById("submit_new_review").disabled = true;
-      document.getElementById("button1").disabled = true;
-      document.getElementById("button2").disabled = true;
-      document.getElementById("button3").disabled = true;
-      document.getElementById("button4").disabled = true;
-      document.getElementById("button5").disabled = true;
-      document.getElementById("review_text").disabled = true;
-    } catch (error) {
-      console.log(error.response.data);
+        document.getElementById("submit_new_review").disabled = true;
+        document.getElementById("button1").disabled = true;
+        document.getElementById("button2").disabled = true;
+        document.getElementById("button3").disabled = true;
+        document.getElementById("button4").disabled = true;
+        document.getElementById("button5").disabled = true;
+        document.getElementById("review_text").disabled = true;
+      } catch (error) {
+        console.log(error.response.data);
+      }
     }
   }
 
   return (
-    <div>
-      <h3>Add Your Review</h3>
-      <form onSubmit={handleSubmit}>
-        <div id="radio_button_group">
+    <div className="add_review_container">
+      <h3 className="add_review_header">Add Your Review</h3>
+      <form className="add_review_form" onSubmit={handleSubmit}>
+        <div className="radio_button_group" id="radio_button_group">
           <label>
             <input
               id="button1"
@@ -102,9 +106,14 @@ const AddReview = ({ book_id }) => {
         <textarea
           id="review_text"
           value={ratingText}
+          rows="5"
           onChange={(event) => setRatingText(event.target.value)}
         ></textarea>
-        <button id="submit_new_review">Submit Review</button>
+        <div className="submit_button_container">
+          <button className="submit_review_btn" id="submit_new_review">
+            Submit Review
+          </button>
+        </div>
       </form>
     </div>
   );
