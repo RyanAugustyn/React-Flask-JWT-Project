@@ -43,11 +43,7 @@ const BookDetails = ({ bookID }) => {
                 )}
               </div>
               <div className="subtitle">
-                {book.subTitle ? (
-                  <h3>{book.subTitle}</h3>
-                ) : (
-                  <h3>Sub goes here</h3>
-                )}
+                {book.subTitle && <h3>{book.subTitle}</h3>}
               </div>
               <div className="price">
                 {book.priceAmount ? (
@@ -70,7 +66,9 @@ const BookDetails = ({ bookID }) => {
             </div>
           </div>
           <div className="descritpiton_container">
-            {book.description.includes("<p") ? (
+            {book.description.includes("<p") ||
+            book.description.includes("<b") ||
+            book.description.includes("<i") ? (
               parse(book.description)
             ) : (
               <p>{book.description}</p>
