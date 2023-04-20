@@ -1,10 +1,17 @@
 export const createBook = (volume) => {
   const id = volume.id;
-  const image = volume.volumeInfo.imageLinks.thumbnail;
+  let image = null;
+  try {
+    image = volume.volumeInfo.imageLinks.thumbnail;
+  } catch {}
+
   const title = volume.volumeInfo.title;
   let subTitle = "";
   try {
     subTitle = volume.volumeInfo.subTitle;
+  } catch {}
+  try {
+    subTitle = volume.volumeInfo.subtitle;
   } catch {}
   let pageCount = null;
   try {
@@ -31,7 +38,11 @@ export const createBook = (volume) => {
   } catch {
     authorString = "";
   }
-  const description = volume.volumeInfo.description;
+  let description = "";
+  try {
+    description = volume.volumeInfo.description;
+  } catch {}
+  if (!description) description = "";
 
   const book = {
     id: id,

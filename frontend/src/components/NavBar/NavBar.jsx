@@ -17,7 +17,12 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/search" style={{ color: "white" }}>
-            Search{" "}
+            Search Books{" "}
+          </Link>
+          |
+          <Link to="/favorites" style={{ color: "white" }}>
+            {" "}
+            My Favorites{" "}
           </Link>
         </li>
         <li>

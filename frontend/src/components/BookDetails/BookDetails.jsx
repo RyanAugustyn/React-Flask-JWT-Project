@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createBook } from "../../utils/BookHelper";
 import axios from "axios";
 import parse from "html-react-parser";
+import "./BookDetails.css";
 
 const BookDetails = ({ bookID }) => {
   const [book, setBook] = useState({});
@@ -18,7 +19,7 @@ const BookDetails = ({ bookID }) => {
         setBook(book);
         setLoading(false);
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
       }
     };
     fetchBook();
@@ -29,34 +30,49 @@ const BookDetails = ({ bookID }) => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
-          <img src={book.image} />
-          <div>
-            <div>{book.pageCount && <p>{book.pageCount} pages</p>}</div>
-            <div>
-              <h2>{book.title}</h2>
-              {book.subTitle && <h3>{book.subTitle}</h3>}
+        <div className="details_container">
+          <div className="image_container">
+            {book.image ? (
+              <img className="book_image" src={book.image} />
+            ) : (
+              <p>No Image</p>
+            )}
+          </div>
+          <div className="above_description_container">
+            <h2 className="book_title">{book.title}</h2>
+            <div className="below_title_container">
+              <div className="pages">
+                {book.pageCount && (
+                  <p className="pages_text">{book.pageCount} pages</p>
+                )}
+              </div>
+              <div className="subtitle">
+                {book.subTitle && <h3>{book.subTitle}</h3>}
+              </div>
+              <div className="price">
+                {book.priceAmount ? (
+                  <p className="price_detail">
+                    {book.priceCurrency}
+                    {book.priceAmount}
+                  </p>
+                ) : (
+                  <p className="price_detail">Not for Sale</p>
+                )}
+              </div>
             </div>
-            <div>
-              {book.priceAmount ? (
-                <p>
-                  {book.priceCurrency}
-                  {book.priceAmount}
+            <div className="author_container">
+              {book.author_count > 0 && (
+                <p className="author_text">
+                  {book.author_count === 1 ? "Author" : "Authors"}:{" "}
+                  {book.author}
                 </p>
-              ) : (
-                <p>Not for Sale</p>
               )}
             </div>
           </div>
-          <div>
-            {book.author_count > 0 && (
-              <p>
-                {book.author_count === 1 ? "Author" : "Authors"}: {book.author}
-              </p>
-            )}
-          </div>
-          <div>
-            {book.description.includes("<p") ? (
+          <div className="descritpiton_container">
+            {book.description.includes("<p") ||
+            book.description.includes("<b") ||
+            book.description.includes("<i") ? (
               parse(book.description)
             ) : (
               <p>{book.description}</p>
