@@ -1,0 +1,39 @@
+.reviewHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+  border-bottom-style: dotted;
+}
+
+.reviewCard {
+  border-style: solid;
+  height: 30vh;
+  margin: 3em;
+  padding: 1em;
+}
+
+.reviewText {
+  height: 75%;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+}
+
+.bottomReview {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.userName {
+  font-size: larger;
+}
+.stars {
+  display: flex;
+  justify-content: flex-end;
+  height: 30%;
+}
+.stars > img {
+  height: 50px;
+}
