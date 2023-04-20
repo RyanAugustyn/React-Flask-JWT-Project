@@ -1,6 +1,8 @@
 .add_review_container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .add_review_header {
@@ -11,6 +13,7 @@
   /* background-color: red; */
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .radio_button_group {
@@ -30,5 +33,9 @@
 }
 
 .submit_review_btn {
+  margin-top: 8px;
+}
+
+.add_favorite_btn {
   margin-top: 8px;
 }
