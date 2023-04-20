@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./AddReview.css";
 
-const AddReview = ({ book_id }) => {
+const AddReview = ({ book_id, thumnail_url, title }) => {
   const [rating, setRating] = useState(0);
   const [ratingText, setRatingText] = useState("");
   const [user, token] = useAuth();
@@ -15,14 +15,12 @@ const AddReview = ({ book_id }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    debugger;
     if (ratingText !== "" && rating !== 0) {
       let book_review = {
         book_id: book_id,
         text: ratingText,
         rating: rating,
       };
-      debugger;
       try {
         let response = await axios.post(
           "http://127.0.0.1:5000/api/user_reviews",
@@ -45,6 +43,27 @@ const AddReview = ({ book_id }) => {
         console.log(error.response.data);
       }
     }
+  }
+
+  async function addToFavories(event) {
+    event.preventDefault();
+    let favorite = {
+      book_id: book_id,
+      title: title,
+      thumbnail_url: thumnail_url,
+    };
+    try {
+      let response = await axios.post(
+        "http://127.0.0.1:5000/api/user_favorites",
+        favorite,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      document.getElementById("add_favorite").disabled = true;
+    } catch {}
   }
 
   return (
@@ -115,6 +134,13 @@ const AddReview = ({ book_id }) => {
           </button>
         </div>
       </form>
+      <button
+        onClick={addToFavories}
+        className="add_favorite_btn"
+        id="add_favorite"
+      >
+        Add to Favorites
+      </button>
     </div>
   );
 };

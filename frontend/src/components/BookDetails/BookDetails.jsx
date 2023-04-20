@@ -4,7 +4,7 @@ import axios from "axios";
 import parse from "html-react-parser";
 import "./BookDetails.css";
 
-const BookDetails = ({ bookID }) => {
+const BookDetails = ({ bookID, setBookTitle, setBookImageURL }) => {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -17,6 +17,8 @@ const BookDetails = ({ bookID }) => {
 
         let book = createBook(response.data);
         setBook(book);
+        setBookTitle(book.title);
+        setBookImageURL(book.image);
         setLoading(false);
       } catch (error) {
         //console.log(error.response.data);
