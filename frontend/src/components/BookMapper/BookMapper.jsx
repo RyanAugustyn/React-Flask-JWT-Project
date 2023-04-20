@@ -1,5 +1,5 @@
 import React from "react";
-import BookCard from "../BookPresenter/BookCard";
+import BookCard from "../BookCard/BookCard";
 import "./BookMapper.css";
 
 const BookMapper = ({ books }) => {

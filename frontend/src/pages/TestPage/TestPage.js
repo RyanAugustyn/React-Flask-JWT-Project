@@ -1,5 +1,5 @@
 import React from "react";
-import AddReview from "../../components/AddReview/AddReview";
+import BookCard from "../../components/BookCard/BookCard";
 
 const TestPage = () => {
   const test_books = [
@@ -29,7 +29,7 @@ const TestPage = () => {
         "Whether you're a novice or an advanced practitioner, you'll find this refreshed book more than lives up to its reputation. Programming Python, Third Edition teaches you the right way to code. It explains Python language syntax and programming techniques in a clear and concise manner, with numerous examples that illustrate both correct usage and common idioms. By reading this comprehensive guide, you'll learn how to apply Python in real-world problem domains such as:",
     },
   ];
-  return <AddReview book_id="aJQILlLxRmAC" />;
+  return <BookCard book={test_books[0]} />;
 };
 
 export default TestPage;
