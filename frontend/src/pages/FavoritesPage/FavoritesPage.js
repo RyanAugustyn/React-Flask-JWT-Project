@@ -42,8 +42,8 @@ const FavoritesPage = (props) => {
   }, [token]);
 
   return (
-    <div className="container">
-      <h1>List of Favorites for {user.username}!</h1>
+    <div>
+      <h1 className="title_top">List of Favorites for {user.username}!</h1>
       {favorites != [] ? (
         <BookMapper books={favorites} />
       ) : (
