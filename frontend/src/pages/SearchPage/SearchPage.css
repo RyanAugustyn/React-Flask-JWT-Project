@@ -1,0 +1,25 @@
+.search_bar_conainer {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+}
+
+.search_bar {
+  border-radius: 50px;
+  padding-left: 20px !important;
+
+  height: 58px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search_button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 58px;
+  border-radius: 50px;
+  padding-right: 30px;
+  padding-left: 30px;
+}

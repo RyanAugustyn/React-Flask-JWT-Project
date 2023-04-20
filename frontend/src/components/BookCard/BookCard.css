@@ -1,8 +1,17 @@
 .book_card {
   max-width: 350px;
-  width: 50%;
+  height: 531px;
+  width: 330px;
   border-radius: 15px;
   text-align: center;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   margin-bottom: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.card_img {
+  max-height: 402px;
 }

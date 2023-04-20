@@ -3,23 +3,24 @@ import { useParams } from "react-router-dom";
 import BookDetails from "../../components/BookDetails/BookDetails";
 import DisplayReveiws from "../../components/DisplayReviews/DisplayReviews";
 import AddReview from "../../components/AddReview/AddReview";
+import "./DetailsPage.css";
 
 const DetailsPage = () => {
   const { bookID } = useParams();
   return (
-    <>
-      <div id="display_part">
+    <div className="page_container">
+      <div className="display_part">
         <BookDetails bookID={bookID} />
       </div>
-      <div id="right_side">
-        <div id="add_review">
+      <div className="right_side">
+        <div className="add_review">
           <AddReview book_id={bookID} />
         </div>
-        <div id="reviews">
+        <div className="reviews">
           <DisplayReveiws book_id={bookID} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

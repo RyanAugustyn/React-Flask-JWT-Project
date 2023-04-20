@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import BookMapper from "../../components/BookMapper/BookMapper";
 import { createBook } from "../../utils/BookHelper";
+import "./SearchPage.css";
 
 const SearchPage = () => {
   const [searchBarText, setSearchBarText] = useState("");
@@ -28,19 +29,25 @@ const SearchPage = () => {
 
   return (
     <div>
-      <p>Search page</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="searchBar"
-          value={searchBarText}
-          onChange={(event) => {
-            setSearchBarText(event.target.value);
-          }}
-        ></input>
-        <label htmlFor="searchBar">Search</label>
-        <button>Search</button>
-      </form>
+      <div className="search_bar_conainer">
+        <form onSubmit={handleSubmit}>
+          <div className="form-floating">
+            <input
+              className="form-control search_bar"
+              type="text"
+              name="searchBar"
+              id="searchBar"
+              placeholder="Search"
+              value={searchBarText}
+              onChange={(event) => {
+                setSearchBarText(event.target.value);
+              }}
+            />
+            <label htmlFor="searchBar"></label>
+          </div>
+          <button className="btn btn-primary search_button">Search</button>
+        </form>
+      </div>
       <BookMapper books={books} />
     </div>
   );

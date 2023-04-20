@@ -12,7 +12,11 @@ const BookCard = ({ book }) => {
           alt="picture of book"
         />
       ) : (
-        <img className="card-img-top" src={image} alt="No cover image" />
+        <img
+          className="card-img-top card_img"
+          src={image}
+          alt="No cover image"
+        />
       )}
       <div className="card-body">
         <h5 className="card-title">{book.title}</h5>
