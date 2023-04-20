@@ -17,6 +17,18 @@ const SearchPage = () => {
         `https://www.googleapis.com/books/v1/volumes?q=${searchBarText}&startIndex=0&maxResults=40&printType=books&key=AIzaSyCvXz_dgisc4ShRelIp9BYV486C7wNPETQ`
       );
       let books = response.data.items;
+      books = books.filter((book) => {
+        try {
+          let tempbook = createBook(book);
+
+          if (tempbook.description === undefined) return false;
+          if (tempbook.description === null) return false;
+          if (tempbook.description === "") return false;
+          return true;
+        } catch {
+          return false;
+        }
+      });
       books = books.map((book) => {
         let createdbook = createBook(book);
         return createdbook;

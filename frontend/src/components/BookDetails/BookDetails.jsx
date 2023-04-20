@@ -19,7 +19,7 @@ const BookDetails = ({ bookID }) => {
         setBook(book);
         setLoading(false);
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
       }
     };
     fetchBook();
