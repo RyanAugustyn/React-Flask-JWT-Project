@@ -1,6 +1,6 @@
 .book_card {
   max-width: 350px;
-  height: 531px;
+  height: 631px;
   width: 330px;
   border-radius: 15px;
   text-align: center;
@@ -14,4 +14,9 @@
 
 .card_img {
   max-height: 402px;
+}
+
+.delete-favorite-button {
+  margin-left: auto;
+  margin-right: auto;
 }
