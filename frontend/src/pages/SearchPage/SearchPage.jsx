@@ -60,7 +60,7 @@ const SearchPage = () => {
           <button className="btn btn-primary search_button">Search</button>
         </form>
       </div>
-      <BookMapper books={books} />
+      <BookMapper books={books} includeDeleteButton={false} />
     </div>
   );
 };

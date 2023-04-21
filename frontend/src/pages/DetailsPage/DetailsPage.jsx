@@ -9,6 +9,7 @@ const DetailsPage = () => {
   const { bookID } = useParams();
   const [bookTitle, setBookTitle] = useState("");
   const [bookImageURL, setBookImageURL] = useState("");
+
   return (
     <div className="page_container">
       <div className="display_part">

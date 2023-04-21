@@ -19,7 +19,7 @@ class UserReviewsResource(Resource):
         db.session.commit()
         return review_schema.dump(review), 201
   
-class FavoriteResource(Resource):
+class FavoritesResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
@@ -35,7 +35,19 @@ class FavoriteResource(Resource):
         favorite.user_id = user_id
         db.session.add(favorite)
         db.session.commit()
-        return favorite_schema.dump(favorite), 201
+        return favorite_schema.dump(favorite), 201  
+        
+class FavoriteResource(Resource):
+    @jwt_required()
+    def delete(self, favorite_id):
+        try:
+            verify_jwt_in_request()
+            favorite_from_db = Favorite.query.get_or_404(favorite_id)
+            db.session.delete(favorite_from_db)
+            db.session.commit()
+            return '', 204    
+        except:
+            return "Unauthorized", 401
 
 class GetBookInformationResource(Resource):
     def get(self, book_id):
