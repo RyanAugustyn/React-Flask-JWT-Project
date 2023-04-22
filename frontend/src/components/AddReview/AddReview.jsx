@@ -11,6 +11,23 @@ const AddReview = ({ book_id, thumnail_url, title, getReviews }) => {
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
   const [favoriteAdded, setFavoriteAdded] = useState(false);
 
+  const radioButtonList = [];
+  for (let i = 1; i <= 5; i++) {
+    radioButtonList.push(
+      <label>
+        <input
+          disabled={reviewSubmitted}
+          id={`button${i}`}
+          type="radio"
+          value={`${i}`}
+          checked={rating === i}
+          onChange={ratingChange}
+        />
+        {i}
+      </label>
+    );
+  }
+
   function ratingChange(event) {
     setRating(parseInt(event.target.value));
   }
@@ -68,64 +85,10 @@ const AddReview = ({ book_id, thumnail_url, title, getReviews }) => {
       <h3 className="add_review_header">Add Your Review</h3>
       <form className="add_review_form" onSubmit={handleSubmit}>
         <div className="radio_button_group" id="radio_button_group">
-          <label>
-            <input
-              disabled={!reviewSubmitted}
-              id="button1"
-              type="radio"
-              value="1"
-              checked={rating === 1}
-              onChange={ratingChange}
-            />
-            1
-          </label>
-          <label>
-            <input
-              disabled={!reviewSubmitted}
-              id="button2"
-              type="radio"
-              value="2"
-              checked={rating === 2}
-              onChange={ratingChange}
-            />
-            2
-          </label>
-          <label>
-            <input
-              disabled={!reviewSubmitted}
-              id="button3"
-              type="radio"
-              value="3"
-              checked={rating === 3}
-              onChange={ratingChange}
-            />
-            3
-          </label>
-          <label>
-            <input
-              disabled={!reviewSubmitted}
-              id="button4"
-              type="radio"
-              value="4"
-              checked={rating === 4}
-              onChange={ratingChange}
-            />
-            4
-          </label>
-          <label>
-            <input
-              disabled={!reviewSubmitted}
-              id="button5"
-              type="radio"
-              value="5"
-              checked={rating === 5}
-              onChange={ratingChange}
-            />
-            5
-          </label>
+          {radioButtonList}
         </div>
         <textarea
-          disabled={!reviewSubmitted}
+          disabled={reviewSubmitted}
           id="review_text"
           value={ratingText}
           rows="5"
@@ -134,7 +97,7 @@ const AddReview = ({ book_id, thumnail_url, title, getReviews }) => {
         <div className="submit_button_container">
           <button
             className="submit_review_btn"
-            disabled={!reviewSubmitted}
+            disabled={reviewSubmitted}
             id="submit_new_review"
           >
             Submit Review
@@ -143,7 +106,7 @@ const AddReview = ({ book_id, thumnail_url, title, getReviews }) => {
       </form>
       <button
         onClick={addToFavories}
-        disabled={!favoriteAdded}
+        disabled={favoriteAdded}
         className="add_favorite_btn"
         id="add_favorite"
       >
