@@ -4,10 +4,12 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./AddReview.css";
 
-const AddReview = ({ book_id, thumnail_url, title }) => {
+const AddReview = ({ book_id, thumnail_url, title, getReviews }) => {
   const [rating, setRating] = useState(0);
   const [ratingText, setRatingText] = useState("");
   const [user, token] = useAuth();
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [favoriteAdded, setFavoriteAdded] = useState(false);
 
   function ratingChange(event) {
     setRating(parseInt(event.target.value));
@@ -32,13 +34,8 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           }
         );
 
-        document.getElementById("submit_new_review").disabled = true;
-        document.getElementById("button1").disabled = true;
-        document.getElementById("button2").disabled = true;
-        document.getElementById("button3").disabled = true;
-        document.getElementById("button4").disabled = true;
-        document.getElementById("button5").disabled = true;
-        document.getElementById("review_text").disabled = true;
+        setReviewSubmitted(true);
+        getReviews();
       } catch (error) {
         console.log(error.response.data);
       }
@@ -62,7 +59,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           },
         }
       );
-      document.getElementById("add_favorite").disabled = true;
+      setFavoriteAdded(true);
     } catch {}
   }
 
@@ -73,6 +70,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
         <div className="radio_button_group" id="radio_button_group">
           <label>
             <input
+              disabled={!reviewSubmitted}
               id="button1"
               type="radio"
               value="1"
@@ -83,6 +81,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           </label>
           <label>
             <input
+              disabled={!reviewSubmitted}
               id="button2"
               type="radio"
               value="2"
@@ -93,6 +92,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           </label>
           <label>
             <input
+              disabled={!reviewSubmitted}
               id="button3"
               type="radio"
               value="3"
@@ -103,6 +103,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           </label>
           <label>
             <input
+              disabled={!reviewSubmitted}
               id="button4"
               type="radio"
               value="4"
@@ -113,6 +114,7 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           </label>
           <label>
             <input
+              disabled={!reviewSubmitted}
               id="button5"
               type="radio"
               value="5"
@@ -123,19 +125,25 @@ const AddReview = ({ book_id, thumnail_url, title }) => {
           </label>
         </div>
         <textarea
+          disabled={!reviewSubmitted}
           id="review_text"
           value={ratingText}
           rows="5"
           onChange={(event) => setRatingText(event.target.value)}
         ></textarea>
         <div className="submit_button_container">
-          <button className="submit_review_btn" id="submit_new_review">
+          <button
+            className="submit_review_btn"
+            disabled={!reviewSubmitted}
+            id="submit_new_review"
+          >
             Submit Review
           </button>
         </div>
       </form>
       <button
         onClick={addToFavories}
+        disabled={!favoriteAdded}
         className="add_favorite_btn"
         id="add_favorite"
       >

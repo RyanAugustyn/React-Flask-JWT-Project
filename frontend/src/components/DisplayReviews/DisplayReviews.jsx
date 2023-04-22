@@ -4,31 +4,11 @@ import axios from "axios";
 import star from "../../images/star.png";
 import "./DisplayReviews.css";
 
-const DisplayReviews = ({ book_id }) => {
-  const [reviews, setReviews] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
-
-  useEffect(() => {
-    getReviews();
-  }, [reviews]);
-
-  const getReviews = async () => {
-    try {
-      let response = await axios.get(
-        `http://127.0.0.1:5000/api/book/${book_id}`
-      );
-      console.log(response.data);
-      setReviews(response.data.reviews);
-      setAverageRating(response.data["average rating"]);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-
+const DisplayReviews = ({ book_id, reviews, averageRating }) => {
   function starLoop(count) {
     let total = [];
     for (let i = 0; i < count; i++) {
-      total.push(<img src={star} alt="star" />);
+      total.push(<img key={i} src={star} alt="star" />);
     }
     return total;
   }
